@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import './App.css'; // 導入 CSS 檔案
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [message, setMessage] = useState('');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    useEffect(() => {
+        fetch('http://localhost:8080/all') // 替換為您的 API URL
+            .then(response => response.text())
+            .then(data => {
+              setMessage(data);
+            })
+            .catch(error => console.error('Error fetching message:', error));
+    }, []);
+    
+    return (
+        <div>
+            <h1>Message from Java:</h1>
+            <p>{message}</p>
+        </div>
+    );
+};
 
-export default App
+export default App;
