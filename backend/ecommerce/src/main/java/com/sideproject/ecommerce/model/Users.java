@@ -5,22 +5,22 @@ package com.sideproject.ecommerce.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users") // 確保與資料庫的 Table 名稱一致（小寫）
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name") // 修改為小寫
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "email") // 修改為小寫
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "account") // 修改為小寫
+    @Column(name = "account")
     private String account;
 
-    @Column(name = "password") // 修改為小寫
+    @Column(name = "password")
     private String password;
 
     public Long getId() { return id; }

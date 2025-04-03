@@ -11,9 +11,13 @@ import java.util.List;
 
 @RestController
 public class PingController {
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public PingController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/all")
     public List<Users> getAllUsers() {
         return userService.getAllUsers();
