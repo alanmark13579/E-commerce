@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -37,9 +36,9 @@ public class LoginController {
             Users user = userService.getUserByEmail(request.getEmail());
             if (user == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
 
-            Map<String, String> response = new HashMap<>();
-            response.put("access_token", jwtUtil.generateToken(user.getName()));
+            Map<String, String> response = new LinkedHashMap<>();
             response.put("user_id", String.valueOf(user.getId()));
+            response.put("access_token", jwtUtil.generateToken(user.getName()));
 
             if (passwordUtil.matches(request.getPassword(), user.getPassword())) {
                 return ResponseEntity.ok(response);
