@@ -3,8 +3,12 @@ package com.sideproject.ecommerce.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "users")
 public class Users {
     @Id
@@ -22,16 +26,4 @@ public class Users {
 
     @Column(name = "password")
     private String password;
-
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getEmail() { return email; }
-    public String getAccount() { return account; }
-    public String getPassword() { return password; }
-
-    public void setId(Long id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setEmail(String email) { this.email = email; }
-    public void setAccount(String account) { this.account = account; }
-    public void setPassword(String password) { this.password = password; }
 }
