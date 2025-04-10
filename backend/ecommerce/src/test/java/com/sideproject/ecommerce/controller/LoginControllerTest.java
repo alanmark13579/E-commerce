@@ -53,10 +53,8 @@ public class LoginControllerTest {
         when(passwordUtil.matches("12345", "hashed")).thenReturn(true);
         when(jwtUtil.generateToken("TestUser")).thenReturn("jwt-token");
 
-        // Act
         ResponseEntity<?> response = loginController.login(request);
 
-        // Assert
         assertEquals(200, response.getStatusCode().value());
         Map<String, String> body = (Map<String, String>) response.getBody();
         assertNotNull(body);
