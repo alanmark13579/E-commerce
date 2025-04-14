@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ProductsRepository extends JpaRepository<Products, Long> {
-    @Query("SELECT p FROM Products p WHERE p.name LIKE %:name%")
+    // Select products by name and fetch only primary images (isPrimary = true)
+    @Query("SELECT DISTINCT p FROM Products p LEFT JOIN FETCH p.images i WHERE i.isPrimary = true AND p.name LIKE %:name%")
     List<Products> findByNameContaining(@Param("name") String name);
 }

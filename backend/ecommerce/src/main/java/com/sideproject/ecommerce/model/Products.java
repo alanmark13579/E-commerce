@@ -2,8 +2,10 @@ package com.sideproject.ecommerce.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,4 +30,7 @@ public class Products {
 
     @Column(name = "remain_number")
     private int remain_number;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductImages> images;
 }
