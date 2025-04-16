@@ -2,6 +2,7 @@ package com.sideproject.ecommerce.dto;
 
 import com.sideproject.ecommerce.model.ProductImages;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.mapstruct.Mapper;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 public class ProductDto {
     private Long id;
     private String name;
