@@ -1,7 +1,7 @@
 package com.sideproject.ecommerce.controller;
 
-import com.sideproject.ecommerce.model.Products;
 import com.sideproject.ecommerce.service.ProductService;
+import com.sideproject.ecommerce.dto.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity<?> getProductByQuery(@RequestParam(required = false) String query) {
-        List<Products> products = productService.getProducts(query);
+        List<ProductDto> products = productService.getProducts(query);
 
         if (products.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(products);

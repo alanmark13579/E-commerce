@@ -1,6 +1,6 @@
 package com.sideproject.ecommerce.service;
 
-import com.sideproject.ecommerce.model.Users;
+import com.sideproject.ecommerce.model.User;
 import com.sideproject.ecommerce.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class UserService {
         this.usersRepository = usersRepository;
     }
 
-    public Users getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return usersRepository.findByEmail(email);
     }
 }

@@ -1,6 +1,6 @@
 package com.sideproject.ecommerce.service;
 
-import com.sideproject.ecommerce.model.Users;
+import com.sideproject.ecommerce.model.User;
 import com.sideproject.ecommerce.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,11 +30,11 @@ public class UserServiceTest {
     @DisplayName("User Service Test: Validate email matching with findByEmail method")
     public void testGetUserByEmail() {
         String email = "test@example.com";
-        Users mockUser = new Users();
+        User mockUser = new User();
         mockUser.setEmail(email);
         when(usersRepository.findByEmail(email)).thenReturn(mockUser);
 
-        Users result = userService.getUserByEmail(email);
+        User result = userService.getUserByEmail(email);
 
         assertNotNull(result);
         assertEquals(email, result.getEmail());
