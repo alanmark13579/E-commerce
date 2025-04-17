@@ -9,6 +9,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 @Table(name = "product_images")
 public class ProductImage {
     @Id
