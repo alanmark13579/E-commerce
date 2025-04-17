@@ -1,6 +1,6 @@
 package com.sideproject.ecommerce.controller;
 
-import com.sideproject.ecommerce.model.Users;
+import com.sideproject.ecommerce.model.User;
 import com.sideproject.ecommerce.model.LoginRequest;
 import com.sideproject.ecommerce.service.UserService;
 import com.sideproject.ecommerce.util.JwtUtil;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
-import org.springframework.context.annotation.Fallback;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
@@ -44,7 +43,7 @@ public class LoginControllerTest {
         // Arrange
         LoginRequest request = new LoginRequest("test@example.com", "12345");
 
-        Users user = new Users();
+        User user = new User();
         user.setId(1L);
         user.setName("TestUser");
         user.setPassword("hashed");
@@ -67,7 +66,7 @@ public class LoginControllerTest {
         // Arrange
         LoginRequest request = new LoginRequest("test@example.com", "12345");
 
-        Users user = new Users();
+        User user = new User();
 
         when(userService.getUserByEmail("test@example.com")).thenReturn(null);
 
@@ -83,7 +82,7 @@ public class LoginControllerTest {
         // Arrange
         LoginRequest request = new LoginRequest("test@example.com", "12345");
 
-        Users user = new Users();
+        User user = new User();
         user.setId(1L);
         user.setName("TestUser");
         user.setPassword("hashed");

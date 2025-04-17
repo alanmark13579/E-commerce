@@ -2,6 +2,7 @@ package com.sideproject.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "product_images")
-public class ProductImages {
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +18,7 @@ public class ProductImages {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     @JsonIgnore
-    private Products product;
+    private Product product;
 
     @Column(name = "image_url")
     private String imageUrl;

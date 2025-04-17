@@ -1,8 +1,8 @@
 package com.sideproject.ecommerce.mapper;
 
 import com.sideproject.ecommerce.dto.ProductDto;
-import com.sideproject.ecommerce.model.ProductImages;
-import com.sideproject.ecommerce.model.Products;
+import com.sideproject.ecommerce.model.Product;
+import com.sideproject.ecommerce.model.ProductImage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -16,12 +16,12 @@ public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
     @Mapping(target = "imageUrl", source = "images", qualifiedByName = "mapImagesToUrls")
-    ProductDto toDto(Products product);
+    ProductDto toDto(Product product);
 
     @Named("mapImagesToUrls")
-    static String mapImagesToUrls(List<ProductImages> images) {
+    static String mapImagesToUrls(List<ProductImage> images) {
         return images.stream()
-                .map(ProductImages::getImageUrl)
+                .map(ProductImage::getImageUrl)
                 .collect(Collectors.joining(","));
     }
 }

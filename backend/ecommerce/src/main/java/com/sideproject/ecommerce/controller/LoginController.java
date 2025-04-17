@@ -1,7 +1,7 @@
 package com.sideproject.ecommerce.controller;
 
 import com.sideproject.ecommerce.model.LoginRequest;
-import com.sideproject.ecommerce.model.Users;
+import com.sideproject.ecommerce.model.User;
 import com.sideproject.ecommerce.service.UserService;
 import com.sideproject.ecommerce.util.PasswordUtil;
 import com.sideproject.ecommerce.util.JwtUtil;
@@ -33,7 +33,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
-            Users user = userService.getUserByEmail(request.getEmail());
+            User user = userService.getUserByEmail(request.getEmail());
             if (user == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
 
             Map<String, String> response = new LinkedHashMap<>();

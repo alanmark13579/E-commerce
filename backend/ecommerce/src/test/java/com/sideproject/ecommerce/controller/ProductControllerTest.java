@@ -1,6 +1,5 @@
 package com.sideproject.ecommerce.controller;
 
-import com.sideproject.ecommerce.model.Products;
 import com.sideproject.ecommerce.dto.ProductDto;
 import com.sideproject.ecommerce.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +35,7 @@ public class ProductControllerTest {
                 .name("Test Product")
                 .category("Test Category")
                 .price(new BigDecimal(999))
-                .remain_number(100)
+                .remainNumber(100)
                 .build();
 
         List<ProductDto> mockProductList = List.of(mockProduct);

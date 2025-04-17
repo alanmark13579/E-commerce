@@ -1,5 +1,8 @@
 package com.sideproject.ecommerce.model;
 
+import lombok.Getter;
+
+@Getter
 public class LoginRequest {
     private String email;
     private String password;
@@ -8,7 +11,4 @@ public class LoginRequest {
         this.email = email;
         this.password = password;
     }
-
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
 }
