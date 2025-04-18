@@ -20,14 +20,14 @@ public class ProductServiceTest {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    public void testGetProducts_withQuery() {
+    public void testGetProducts_withName() {
         productService.getProducts("Test");
         verify(productsRepository).findByNameContaining("Test");
         verify(productsRepository, never()).findAll();
     }
 
     @Test
-    public void testGetProducts_withoutQuery() {
+    public void testGetProducts_withoutName() {
         productService.getProducts(null);
         verify(productsRepository).findAll();
         verify(productsRepository, never()).findByNameContaining(any());

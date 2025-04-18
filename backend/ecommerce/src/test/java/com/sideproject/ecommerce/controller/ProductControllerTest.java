@@ -41,7 +41,7 @@ public class ProductControllerTest {
         List<ProductDto> mockProductList = List.of(mockProduct);
         when(productService.getProducts("test")).thenReturn(mockProductList);
 
-        ResponseEntity<?> response = productController.getProductByQuery("test");
+        ResponseEntity<?> response = productController.getProductByName("test");
         assertEquals(200, response.getStatusCode().value());
         assertEquals(mockProductList, response.getBody());
     }
@@ -50,7 +50,7 @@ public class ProductControllerTest {
     void testGetProductsByQuery_NotFound() {
         when(productService.getProducts("NotExist")).thenReturn(List.of());
 
-        ResponseEntity<?> response = productController.getProductByQuery("NotExist");
+        ResponseEntity<?> response = productController.getProductByName("NotExist");
 
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode().value());
         assertEquals(List.of(), response.getBody());
