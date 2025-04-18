@@ -7,6 +7,8 @@ import {
     buttonStyle,
 } from './loginStyles';
 import useLoginForm from '../../hooks/useLoginForm';
+import TextInput from '../common/TextInput';
+import Button from '../common/Button';
 
 const LoginForm = () => {
     const {
@@ -24,7 +26,7 @@ const LoginForm = () => {
         <div style={containerStyle}>
             <div style={cardStyle}>
                 <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Login</h2>
-                <input
+                <TextInput
                     type="email"
                     placeholder="Email"
                     value={email}
@@ -34,7 +36,7 @@ const LoginForm = () => {
                 {emailError && (
                     <div style={errorTextStyle}>Invalid email format</div>
                 )}
-                <input
+                <TextInput
                     type="password"
                     placeholder="Password"
                     value={password}
@@ -44,13 +46,13 @@ const LoginForm = () => {
                 {error && (
                     <div style={errorTextStyle}>{error}</div>
                 )}
-                <button
+                <Button
                     onClick={handleLogin}
                     style={{ ...buttonStyle(isLoginDisabled), marginTop: '15px' }}
                     disabled={isLoginDisabled}
                 >
                     Login
-                </button>
+                </Button>
             </div>
         </div>
     );

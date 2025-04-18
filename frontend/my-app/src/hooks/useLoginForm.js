@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginUser } from '../api/userApi';
+import { useNavigate } from "react-router-dom";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -8,6 +9,7 @@ const useLoginForm = () => {
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate(); 
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
@@ -29,7 +31,7 @@ const useLoginForm = () => {
             const data = await loginUser({ email, password });
             document.cookie = `access_token=${data.access_token}; path=/; max-age=3600;`;
             document.cookie = `user_id=${data.user_id}; path=/; max-age=3600;`;
-            // window.location.href = '/dashboard';
+            navigate("/search")
         } catch (err) {
             console.error('Login Failed:', err.message);
             setError(err.message);
