@@ -1,6 +1,7 @@
 package com.sideproject.ecommerce.controller;
 
 import com.sideproject.ecommerce.dto.ProductDto;
+import com.sideproject.ecommerce.model.ProductImage;
 import com.sideproject.ecommerce.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ public class ProductControllerTest {
         List<ProductDto> mockProductList = List.of(mockProduct);
         when(productService.getProducts("test")).thenReturn(mockProductList);
 
-        ResponseEntity<?> response = productController.getProductByQuery("test");
+        ResponseEntity<?> response = productController.getProductByName("test");
         assertEquals(200, response.getStatusCode().value());
         assertEquals(mockProductList, response.getBody());
     }
@@ -50,9 +51,28 @@ public class ProductControllerTest {
     void testGetProductsByQuery_NotFound() {
         when(productService.getProducts("NotExist")).thenReturn(List.of());
 
-        ResponseEntity<?> response = productController.getProductByQuery("NotExist");
+        ResponseEntity<?> response = productController.getProductByName("NotExist");
 
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode().value());
         assertEquals(List.of(), response.getBody());
+    }
+
+    @Test
+    void testGetProductImagesById(){
+        ProductImage mockProductImages = new ProductImage();
+        mockProductImages.setId(1L);
+        List<ProductImage> mockProductImageList = List.of(mockProductImages);
+
+        when(productService.getProductImages(1L)).thenReturn(mockProductImageList);
+
+        ResponseEntity<?> response = productController.getProductImages(1L);
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test
+    void testGetProductImagesById_NotFound(){
+        when(productService.getProductImages(1L)).thenReturn(List.of());
+        ResponseEntity<?> response = productController.getProductImages(1L);
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode().value());
     }
 }
