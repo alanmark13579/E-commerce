@@ -1,6 +1,7 @@
 package com.sideproject.ecommerce.controller;
 
 import com.sideproject.ecommerce.dto.ProductDto;
+import com.sideproject.ecommerce.model.ProductImage;
 import com.sideproject.ecommerce.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,5 +55,24 @@ public class ProductControllerTest {
 
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode().value());
         assertEquals(List.of(), response.getBody());
+    }
+
+    @Test
+    void testGetProductImagesById(){
+        ProductImage mockProductImages = new ProductImage();
+        mockProductImages.setId(1L);
+        List<ProductImage> mockProductImageList = List.of(mockProductImages);
+
+        when(productService.getProductImages(1L)).thenReturn(mockProductImageList);
+
+        ResponseEntity<?> response = productController.getProductImages(1L);
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test
+    void testGetProductImagesById_NotFound(){
+        when(productService.getProductImages(1L)).thenReturn(List.of());
+        ResponseEntity<?> response = productController.getProductImages(1L);
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode().value());
     }
 }
