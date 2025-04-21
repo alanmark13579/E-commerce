@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ label, type, value, onChange }) => {
+const TextInput = ({ label, type, value, onChange, style}) => {
     return (
         <div>
             <label>{label}</label>
@@ -8,7 +8,7 @@ const TextInput = ({ label, type, value, onChange }) => {
                 type={type}
                 value={value}
                 onChange={onChange}
-                style={{ width: '90%', padding: '10px', margin: '5px 0' }}
+                style={style}
                 placeholder={label}
             />
         </div>

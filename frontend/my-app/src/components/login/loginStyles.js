@@ -7,6 +7,15 @@ export const containerStyle = {
     backgroundColor: '#1a1a1a',
 };
 
+export const loginContainerStyle = {
+    width: '100%',
+    maxWidth: '400px',
+    padding: '20px',
+    margin: '0 auto',
+    backgroundColor: '#2c2c2c',
+    borderRadius: '8px',
+};
+
 export const cardStyle = {
     maxWidth: '400px',
     width: '80%',
@@ -21,6 +30,7 @@ export const inputStyle = {
     padding: '10px',
     borderRadius: '4px',
     border: '1px solid #ccc',
+    boxSizing: 'border-box'
 };
 
 export const errorTextStyle = {
