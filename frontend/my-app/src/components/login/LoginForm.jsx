@@ -5,7 +5,7 @@ import {
     inputStyle,
     errorTextStyle,
     buttonStyle,
-} from './loginStyles';
+} from './loginStyle';
 import useLoginForm from '../../hooks/useLoginForm';
 import TextInput from '../common/TextInput';
 import Button from '../common/Button';

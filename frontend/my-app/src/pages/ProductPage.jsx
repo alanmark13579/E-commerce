@@ -1,6 +1,10 @@
-import SearchForm from '../components/search/SearchForm';
+import ProductForm from '../components/product/ProductForm';
+import { useParams, useLocation } from 'react-router-dom';
 
-export default function SearchPage() {
+export default function ProductPage() {
+    const { id } = useParams();
+    const location = useLocation();
+
     return (
         <div
             style={{
@@ -12,7 +16,7 @@ export default function SearchPage() {
                 backgroundColor: '#1a1a1a',
             }}>
             <div>
-                <SearchForm/>
+                <ProductForm productId={id} product={location.state} />
             </div>
         </div>
     );
