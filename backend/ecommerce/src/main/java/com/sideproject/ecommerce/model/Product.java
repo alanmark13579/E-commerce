@@ -29,7 +29,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "remain_number")
-    private int remain_number;
+    private int remainNumber;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProductImage> images;
