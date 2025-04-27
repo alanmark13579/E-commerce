@@ -20,8 +20,8 @@ public class ProductController {
     public ProductController(ProductService productService) { this.productService = productService; }
 
     @GetMapping
-    public ResponseEntity<?> getProductByName(@RequestParam(required = false) String productName) {
-        List<ProductDto> products = productService.getProducts(productName);
+    public ResponseEntity<?> getProductByName(@RequestParam(required = false) String query) {
+        List<ProductDto> products = productService.getProducts(query);
 
         if (products.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(products);

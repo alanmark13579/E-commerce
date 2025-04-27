@@ -17,25 +17,30 @@ const SearchForm = () => {
         query, 
         products,
         handleQueryChange,
-        handleSearch
+        handleSearch,
+        handleProductClick
     } = useSearchForm();
   
     return (
       <div style={container}>
         <div style={barContainer}>
-        <TextInput
-          value={query}
-          onChange={handleQueryChange}
-          placeholder="Search products"
-          style={searchInputStyle}
-        />
-        <Button onClick={handleSearch} style={searchButtonStyle}>
-          Search
-        </Button>
+          <TextInput
+            value={query}
+            onChange={handleQueryChange}
+            placeholder="Search products"
+            style={searchInputStyle}
+          />
+          <Button onClick={handleSearch} style={searchButtonStyle}>
+            Search
+          </Button>
         </div>
         <div style={productGrid}>
           {products.map((product, index) => (
-            <div key={index} style={productCard}>
+            <div
+              key={index}
+              style={productCard}
+              onClick={() => handleProductClick(product)}
+            >
               <img src={product.imageUrl} alt={product.name} style={productImage} />
               <div>{product.name}</div>
             </div>
