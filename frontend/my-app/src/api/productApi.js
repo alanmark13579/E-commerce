@@ -1,16 +1,12 @@
-import axios from 'axios';
-import { API_URL } from '../config';
+import apiClient from './apiClient';
 
 export function productDetail(productId) {
-    return axios.get(`${API_URL}/products/${productId}`)
-    .then((response) => {
-        return response.data;
-    })
-    .catch((error) => {
-        if (error.response) {
-        throw new Error(error.response.data.message || 'Product Failed');
-        } else {
-        throw new Error('Unable to connect to the server, please try again later');
-        }
-    });
+    return apiClient
+      .get(`/products/${productId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        const message =
+          error.response?.data?.message || 'Unable to connect to the server, please try again later';
+        throw new Error(message);
+      });
   }

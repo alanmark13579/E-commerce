@@ -26,7 +26,6 @@ const useLoginForm = () => {
             setError('Please enter your email and password');
             return;
         }
-
         try {
             const data = await loginUser({ email, password });
             document.cookie = `access_token=${data.access_token}; path=/; max-age=3600;`;
