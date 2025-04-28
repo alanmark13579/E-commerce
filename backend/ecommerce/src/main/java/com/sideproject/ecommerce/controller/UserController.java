@@ -16,13 +16,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-public class LoginController {
+public class UserController {
 
     private final UserService userService;
     private JwtUtil jwtUtil;
     private PasswordUtil passwordUtil;
     @Autowired
-    public LoginController(UserService userService) {this.userService = userService;}
+    public UserController(UserService userService) {this.userService = userService;}
 
     @Autowired
     public void setJwtUtil(JwtUtil jwtUtil) {this.jwtUtil = jwtUtil;}
@@ -46,5 +46,23 @@ public class LoginController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
             }
         } catch (Exception e) { return ResponseEntity.badRequest().body(e.getMessage()); }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody User register) {
+        try {
+            String email = register.getEmail();
+            if (userService.getUserByEmail(email) == null) {
+                String encodedPassword = passwordUtil.changeToBCrypt(register.getPassword());
+                register.setPassword(encodedPassword);
+                userService.setUser(register);
+                return ResponseEntity.ok("Register Success");
+            } else {
+                return ResponseEntity.badRequest().body("Email already exists");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Internal server error");
+        }
     }
 }

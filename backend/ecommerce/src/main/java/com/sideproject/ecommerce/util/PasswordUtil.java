@@ -7,7 +7,11 @@ import org.springframework.stereotype.Component;
 public class PasswordUtil {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public  boolean matches(String password, String hashedPassword) {
+    public boolean matches(String password, String hashedPassword) {
         return passwordEncoder.matches(password, hashedPassword);
+    }
+
+    public String changeToBCrypt(String password) {
+        return passwordEncoder.encode(password);
     }
 }
