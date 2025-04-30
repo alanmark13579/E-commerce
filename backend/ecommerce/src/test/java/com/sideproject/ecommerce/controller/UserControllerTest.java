@@ -16,7 +16,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class LoginControllerTest {
+public class UserControllerTest {
 
     @Mock
     private UserService userService;
@@ -28,12 +28,12 @@ public class LoginControllerTest {
     private PasswordUtil passwordUtil;
 
     @InjectMocks
-    private LoginController loginController;
+    private UserController loginController;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        loginController = new LoginController(userService);
+        loginController = new UserController(userService);
         loginController.setJwtUtil(jwtUtil);
         loginController.setPasswordUtil(passwordUtil);
     }
