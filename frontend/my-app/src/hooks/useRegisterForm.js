@@ -1,15 +1,22 @@
 import { useState } from 'react';
-import { loginUser } from '../api/userApi';
+import { registerUser } from '../api/registerApi';
 import { useNavigate } from "react-router-dom";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const useLoginForm = () => {
+
+const useRegisterForm = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState(false);
     const [error, setError] = useState('');
+
     const navigate = useNavigate(); 
+
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
@@ -21,37 +28,32 @@ const useLoginForm = () => {
         setPassword(e.target.value);
     };
 
-    const handleLogin = async () => {
-        if (!email || !password) {
-            setError('Please enter your email and password');
+    const handleRegister = async () => {
+        if (!email || !password || !name) {
+            setError('Please enter your name, email and password ');
             return;
         }
         try {
-            const data = await loginUser({ email, password });
-            document.cookie = `access_token=${data.access_token}; path=/; max-age=3600;`;
-            document.cookie = `user_id=${data.user_id}; path=/; max-age=3600;`;
-            navigate("/search")
+            await registerUser({ name ,email, password });
+            navigate("/")
         } catch (err) {
-            console.error('Login Failed:', err.message);
+            console.error('Register Failed:', err.message);
             setError(err.message);
         }
-    };
-
-    const handleRegisterClick = () => {
-        navigate("/register")
-    };
+    }
 
     return {
-        email,
-        password,
-        emailError,
+        name,
         error,
-        isLoginDisabled: emailError || !email || !password,
-        handleRegisterClick,
+        email,
+        emailError,
+        password,
+        isRegisterDisabled: emailError || !email || !password || !name,
+        handleNameChange,
         handleEmailChange,
         handlePasswordChange,
-        handleLogin,
-    };
+        handleRegister
+    }
 };
 
-export default useLoginForm;
+export default useRegisterForm;

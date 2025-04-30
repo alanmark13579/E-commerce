@@ -5,6 +5,8 @@ import {
     inputStyle,
     errorTextStyle,
     buttonStyle,
+    registerWrapperStyle,
+    registerLinkStyle
 } from './loginStyle';
 import useLoginForm from '../../hooks/useLoginForm';
 import TextInput from '../common/TextInput';
@@ -17,6 +19,7 @@ const LoginForm = () => {
         emailError,
         error,
         isLoginDisabled,
+        handleRegisterClick,
         handleEmailChange,
         handlePasswordChange,
         handleLogin,
@@ -25,6 +28,11 @@ const LoginForm = () => {
     return (
         <div style={containerStyle}>
             <div style={cardStyle}>
+                <div style={registerWrapperStyle}>
+                    <button onClick={handleRegisterClick} style={registerLinkStyle}>
+                        Register
+                    </button>
+                </div>
                 <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Login</h2>
                 <TextInput
                     type="email"
