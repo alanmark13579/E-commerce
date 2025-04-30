@@ -48,3 +48,19 @@ export const buttonStyle = (disabled) => ({
     borderRadius: '4px',
     cursor: disabled ? 'not-allowed' : 'pointer',
 });
+
+export const registerWrapperStyle = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginBottom: '10px',
+};
+
+export const registerLinkStyle = {
+    background: 'none',
+    border: 'none',
+    color: '#007bff',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    fontSize: '14px',
+    padding: 0,
+};
