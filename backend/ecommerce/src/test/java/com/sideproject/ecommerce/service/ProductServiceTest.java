@@ -1,7 +1,7 @@
 package com.sideproject.ecommerce.service;
 
 import com.sideproject.ecommerce.repository.ProductImageRepository;
-import com.sideproject.ecommerce.repository.ProductsRepository;
+import com.sideproject.ecommerce.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 
 public class ProductServiceTest {
     @Mock
-    private ProductsRepository productsRepository;
+    private ProductRepository productRepository;
 
     @Mock
     private ProductImageRepository productImageRepository;
@@ -29,21 +29,21 @@ public class ProductServiceTest {
     @Test
     public void testGetProducts_withName() {
         productService.getProducts("Test");
-        verify(productsRepository).findByNameContaining("Test");
-        verify(productsRepository, never()).findAll();
+        verify(productRepository).findByNameContaining("Test");
+        verify(productRepository, never()).findAll();
     }
 
     @Test
     public void testGetProducts_withoutName() {
         productService.getProducts(null);
-        verify(productsRepository).findAll();
-        verify(productsRepository, never()).findByNameContaining(any());
+        verify(productRepository).findAll();
+        verify(productRepository, never()).findByNameContaining(any());
     }
 
     @Test
     public void getProductsImages_withId(){
         Long productId = 1L;
-        when(productsRepository.existsById(productId)).thenReturn(true);
+        when(productRepository.existsById(productId)).thenReturn(true);
         productService.getProductImages(productId);
         verify(productImageRepository).findByProductId(productId);
     }
@@ -51,7 +51,7 @@ public class ProductServiceTest {
     @Test
     public void getProductsImages_withoutId(){
         Long productId = 1L;
-        when(productsRepository.existsById(productId)).thenReturn(false);
+        when(productRepository.existsById(productId)).thenReturn(false);
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
