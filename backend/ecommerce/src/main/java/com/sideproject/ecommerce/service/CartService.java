@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,41 @@ public class CartService {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
-    
+
+    @Transactional
+    public void addProductToCart(Long userId, CartItemUpdateRequest request) {
+        Cart cart = cartRepository.findByUserId(userId)
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    User user = userRepository.findById(userId)
+                            .orElseThrow(() -> new RuntimeException("User not found"));
+                    newCart.setUser(user);
+                    return newCart;
+                });
+
+        List<CartItem> existingItems = cart.getItems();
+        Product product = productRepository.findById(request.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Optional<CartItem> existingItemOpt = existingItems.stream()
+                .filter(item -> item.getProduct().getId().equals(product.getId()))
+                .findFirst();
+
+        // Update and Add Product
+        if (existingItemOpt.isPresent()) {
+            CartItem existingItem = existingItemOpt.get();
+            existingItem.setQuantity(existingItem.getQuantity() + request.getQuantity());
+        } else {
+            CartItem newItem = new CartItem();
+            newItem.setProduct(product);
+            newItem.setQuantity(request.getQuantity());
+            newItem.setCart(cart);
+            existingItems.add(newItem);
+        }
+
+        cartRepository.save(cart);
+    }
+
     @Transactional
     public void updateCart(Long userId, CartUpdateRequest request) {
         Cart cart = cartRepository.findByUserId(userId)

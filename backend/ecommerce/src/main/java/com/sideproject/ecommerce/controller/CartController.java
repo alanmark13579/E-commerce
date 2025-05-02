@@ -1,5 +1,6 @@
 package com.sideproject.ecommerce.controller;
 
+import com.sideproject.ecommerce.model.CartItemUpdateRequest;
 import com.sideproject.ecommerce.model.CartUpdateRequest;
 import com.sideproject.ecommerce.model.UserPrincipal;
 import com.sideproject.ecommerce.service.CartService;
@@ -23,5 +24,12 @@ public class CartController {
                                         @RequestBody CartUpdateRequest items) {
         cartService.updateCart(user.getId(), items);
         return ResponseEntity.ok("Update Success");
+    }
+
+    @PostMapping("/addProduct")
+    public ResponseEntity<?> addProductToCart(@AuthenticationPrincipal UserPrincipal user,
+                                        @RequestBody CartItemUpdateRequest items) {
+        cartService.addProductToCart(user.getId(), items);
+        return ResponseEntity.ok("Add Success");
     }
 }
