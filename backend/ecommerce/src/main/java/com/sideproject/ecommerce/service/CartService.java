@@ -4,6 +4,7 @@ import com.sideproject.ecommerce.model.*;
 import com.sideproject.ecommerce.repository.CartRepository;
 import com.sideproject.ecommerce.repository.UserRepository;
 import com.sideproject.ecommerce.repository.ProductRepository;
+import com.sideproject.ecommerce.dto.CartDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,34 @@ public class CartService {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+    }
+    // 需要提供主圖片給 getAPI
+    // 需要一個 CartDto - image 、 product Name、quantity
+    // 透過 Product repository 給把  image 、 product Name 給提出來
+    public List<CartDto> getCart(Long userId) {
+        Cart cart = cartRepository.findByUserId(userId)
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    User user = userRepository.findById(userId)
+                            .orElseThrow(() -> new RuntimeException("User not found"));
+                    newCart.setUser(user);
+                    return cartRepository.save(newCart);
+                });
+
+
+        List<CartDto> cartItems = cart.getItems().stream()
+                .map(item -> new CartDto(
+                        item.getProduct().getId(),
+                        item.getProduct().getName(),
+                        item.getQuantity(),
+                        item.getProduct().getImages().stream()
+                                .map(ProductImage::getImageUrl)
+                                .findFirst()
+                                .orElseThrow(() -> new RuntimeException("Image not found"))
+                ))
+                .collect(Collectors.toList());
+
+        return cartItems;
     }
 
     @Transactional

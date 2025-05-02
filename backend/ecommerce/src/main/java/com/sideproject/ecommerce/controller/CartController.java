@@ -19,7 +19,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping
+    @PostMapping("/update")
     public ResponseEntity<?> updateCart(@AuthenticationPrincipal UserPrincipal user,
                                         @RequestBody CartUpdateRequest items) {
         cartService.updateCart(user.getId(), items);
@@ -31,5 +31,10 @@ public class CartController {
                                         @RequestBody CartItemUpdateRequest items) {
         cartService.addProductToCart(user.getId(), items);
         return ResponseEntity.ok("Add Success");
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getCart(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok( cartService.getCart(user.getId()));
     }
 }
