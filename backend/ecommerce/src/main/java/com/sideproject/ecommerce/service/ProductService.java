@@ -5,7 +5,7 @@ import com.sideproject.ecommerce.dto.ProductDto;
 import com.sideproject.ecommerce.mapper.ProductMapper;
 import com.sideproject.ecommerce.model.ProductImage;
 import com.sideproject.ecommerce.repository.ProductImageRepository;
-import com.sideproject.ecommerce.repository.ProductsRepository;
+import com.sideproject.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +14,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
-    private final ProductsRepository productsRepository;
+    private final ProductRepository productRepository;
     private final ProductImageRepository productImageRepository;
     private  ProductMapper productMapper;
 
     @Autowired
-    public ProductService(ProductsRepository productsRepository, ProductImageRepository productImageRepository) {
-        this.productsRepository = productsRepository;
+    public ProductService(ProductRepository productRepository, ProductImageRepository productImageRepository) {
+        this.productRepository = productRepository;
         this.productImageRepository = productImageRepository;
     }
     @Autowired
     public void setProductMapper(ProductMapper productMapper) {this.productMapper = productMapper;}
 
     public List<ProductDto>  getProducts(String query){
-        List<Product> products = productsRepository.findByNameContaining(query);
+        List<Product> products = productRepository.findByNameContaining(query);
 
         return  products.stream()
                 .map(productMapper::toDto)
@@ -35,7 +35,7 @@ public class ProductService {
     }
 
     public List<ProductImage> getProductImages(Long productId) {
-        if (!productsRepository.existsById(productId)) {
+        if (!productRepository.existsById(productId)) {
             throw new IllegalArgumentException("Product does not exist.");
         }
 

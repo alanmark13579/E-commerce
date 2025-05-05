@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     // Select products by name and fetch only primary images (isPrimary = true)
     @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.images i WHERE i.isPrimary = true AND p.name LIKE %:name%")
     List<Product> findByNameContaining(@Param("name") String name);
