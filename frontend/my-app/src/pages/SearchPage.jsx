@@ -1,4 +1,5 @@
 import SearchForm from '../components/search/SearchForm';
+import MainLayout from '../layouts/mainLayout';
 
 export default function SearchPage() {
     return (
@@ -9,11 +10,11 @@ export default function SearchPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#1a1a1a',
+                backgroundColor: '#ffffff',
             }}>
-            <div>
+            <MainLayout>
                 <SearchForm/>
-            </div>
+            </MainLayout>
         </div>
     );
 }

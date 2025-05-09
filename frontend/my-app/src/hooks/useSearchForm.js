@@ -18,7 +18,6 @@ const useSearchForm = () => {
     };
 
     const handleProductClick = (product) => {
-        console.log(product.imageUrl)
         navigate(`/product/${product.id}`, {
             state: product
         });

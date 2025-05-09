@@ -28,9 +28,7 @@ public class CartService {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
-    // 需要提供主圖片給 getAPI
-    // 需要一個 CartDto - image 、 product Name、quantity
-    // 透過 Product repository 給把  image 、 product Name 給提出來
+
     public List<CartDto> getCart(Long userId) {
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseGet(() -> {
@@ -46,6 +44,8 @@ public class CartService {
                 .map(item -> new CartDto(
                         item.getProduct().getId(),
                         item.getProduct().getName(),
+                        item.getProduct().getPrice(),
+                        item.getProduct().getRemainNumber(),
                         item.getQuantity(),
                         item.getProduct().getImages().stream()
                                 .map(ProductImage::getImageUrl)
