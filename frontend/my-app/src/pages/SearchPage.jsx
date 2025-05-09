@@ -10,7 +10,7 @@ export default function SearchPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#333',
             }}>
             <MainLayout>
                 <SearchForm/>

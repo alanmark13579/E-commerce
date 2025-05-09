@@ -4,7 +4,7 @@ export const containerStyle = {
     padding: '20px',
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
     borderRadius: '10px',
-    background: '#fff',
+    background: '#333',
 };
   
 export const titleStyle = {

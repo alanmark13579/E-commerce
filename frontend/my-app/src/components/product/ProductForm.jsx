@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   containerStyle,
   breadcrumbStyle,
@@ -9,9 +9,13 @@ import {
   thumbnailStyle,
   rightPanel,
   textStyle,
+  quantityControlStyle,
+  quantityButtonStyle,
+  quantityInputStyle,
+  errorStyle,
   cartButtonStyle
 } from './ProductStyle';
-import useProductForm from '../../hooks/useProductForm';
+import useProductForm from '../../hooks/useProductForm'
 
 const ProductForm = ({ productId, product}) => {
   const {
@@ -24,68 +28,81 @@ const ProductForm = ({ productId, product}) => {
     updateQuantity,
     handleChange,
     handleBlur
-  } = useProductForm(productId, product.remainNumber);
+  } = useProductForm(productId, product.remainNumber)
 
   return (
     <div style={containerStyle}>
       <div style={breadcrumbStyle}>Home / {product.category}</div>
 
       <div style={contentStyle}>
+        {/* Left side: main image + thumbnails */}
         <div style={leftPanel}>
-            <img src={mainImage} alt="Main" style={mainImageStyle} />
+          <img src={mainImage} alt="Main" style={mainImageStyle} />
 
-            <div style={thumbnailContainer}>
+          <div style={thumbnailContainer}>
             {thumbnails.map((imageUrl, id) => (
-                <img
+              <img
                 key={id}
                 src={imageUrl}
                 alt={`Thumb ${id}`}
                 onClick={() => handleThumbnailClick(id)}
                 style={thumbnailStyle}
-                />
+              />
             ))}
-            </div>
+          </div>
         </div>
 
+        {/* Right side: product details */}
         <div style={rightPanel}>
           <div style={textStyle}>Product：{product.name}</div>
           <div style={textStyle}>Price：{product.price}</div>
           <div style={textStyle}>Remain Number：{product.remainNumber}</div>
-          <div style={textStyle}>
+
+          <div>
+            <div style={textStyle}>Quantity：</div>
+            <div style={quantityControlStyle}>
               <button
-                  type="button"
-                  onClick={() => updateQuantity(-1)}
-                  disabled={quantity <= 1}
-              > - </button>
+                type="button"
+                onClick={() => updateQuantity(-1)}
+                style={quantityButtonStyle}
+                disabled={quantity <= 1}
+              >
+                -
+              </button>
 
               <input
                 type="number"
                 value={quantity}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                style={{ height: '40px', width: '60px', textAlign: 'center' }}
+                style={quantityInputStyle}
                 min={1}
                 max={product.remainNumber}
               />
-              
-              <button
-                  type="button"
-                  onClick={() => updateQuantity(1)}
-                  disabled={quantity >= product.remainNumber}
-              > + </button>
 
-              {error && (
-                <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
-                  {error}
-                </div>
-              )}  
+              <button
+                type="button"
+                onClick={() => updateQuantity(1)}
+                style={quantityButtonStyle}
+                disabled={quantity >= product.remainNumber}
+              >
+                +
+              </button>
+            </div>
+
+            {error && <div style={errorStyle}>{error}</div>}
           </div>
 
-          <button onClick={() => handleAddToCart(product.id)} style={cartButtonStyle}>Add to Cart</button>
+          <button
+            onClick={() => handleAddToCart(product.id)}
+            style={cartButtonStyle}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductForm;
+export default ProductForm
