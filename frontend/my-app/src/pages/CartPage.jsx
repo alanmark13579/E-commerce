@@ -1,5 +1,4 @@
 import CartForm from '../components/cart/CartForm.jsx';
-import MainLayout from '../layouts/mainLayout';
 
 export default function CartPage() {
 
@@ -13,9 +12,9 @@ export default function CartPage() {
                 paddingBottom: '40px',
             }}
             >
-            <MainLayout>
+            <div>
                 <CartForm />
-            </MainLayout>
+            </div>
         </div>
     );
 }

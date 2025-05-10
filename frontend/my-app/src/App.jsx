@@ -9,9 +9,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/" element={<SearchPage />} />
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
