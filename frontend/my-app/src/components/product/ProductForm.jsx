@@ -13,13 +13,18 @@ import {
 } from './ProductStyle';
 import useProductForm from '../../hooks/useProductForm';
 
-const ProductForm = ({ productId, product }) => {
+const ProductForm = ({ productId, product}) => {
   const {
     mainImage,
     thumbnails,
+    quantity,
+    error,
     handleAddToCart,
-    handleThumbnailClick
-  } = useProductForm(productId);
+    handleThumbnailClick,
+    updateQuantity,
+    handleChange,
+    handleBlur
+  } = useProductForm(productId, product.remainNumber);
 
   return (
     <div style={containerStyle}>
@@ -46,8 +51,37 @@ const ProductForm = ({ productId, product }) => {
           <div style={textStyle}>Product：{product.name}</div>
           <div style={textStyle}>Price：{product.price}</div>
           <div style={textStyle}>Remain Number：{product.remainNumber}</div>
+          <div style={textStyle}>
+              <button
+                  type="button"
+                  onClick={() => updateQuantity(-1)}
+                  disabled={quantity <= 1}
+              > - </button>
 
-          <button onClick={handleAddToCart} style={cartButtonStyle}>Add to Cart</button>
+              <input
+                type="number"
+                value={quantity}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                style={{ height: '40px', width: '60px', textAlign: 'center' }}
+                min={1}
+                max={product.remainNumber}
+              />
+              
+              <button
+                  type="button"
+                  onClick={() => updateQuantity(1)}
+                  disabled={quantity >= product.remainNumber}
+              > + </button>
+
+              {error && (
+                <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+                  {error}
+                </div>
+              )}  
+          </div>
+
+          <button onClick={() => handleAddToCart(product.id)} style={cartButtonStyle}>Add to Cart</button>
         </div>
       </div>
     </div>

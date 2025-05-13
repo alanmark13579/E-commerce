@@ -1,5 +1,6 @@
 import ProductForm from '../components/product/ProductForm';
 import { useParams, useLocation } from 'react-router-dom';
+import MainLayout from '../layouts/mainLayout';
 
 export default function ProductPage() {
     const { id } = useParams();
@@ -15,9 +16,9 @@ export default function ProductPage() {
                 alignItems: 'center',
                 backgroundColor: '#1a1a1a',
             }}>
-            <div>
+            <MainLayout>
                 <ProductForm productId={id} product={location.state} />
-            </div>
+            </MainLayout>
         </div>
     );
 }
