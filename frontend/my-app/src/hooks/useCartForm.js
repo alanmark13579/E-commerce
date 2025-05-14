@@ -6,22 +6,22 @@ const useCartForm = () => {
     const [handleSubmit] = useState(null)
 
     useEffect(() => {
-        const fetchCart = async () => {
-          try {
-            const items = await getCart()
-            // Let every product have unique error msg
-            const itemsWithError = items.map(item => ({
-              ...item,
-              error: ""
-            }));
-            setCartItems(itemsWithError)
+      const fetchCart = async () => {
+        try {
+          const items = await getCart()
+          // Let every product have unique error msg
+          const itemsWithError = items.map(item => ({
+            ...item,
+            error: ""
+          }));
+          setCartItems(itemsWithError)
 
-          } catch (err) {
-            console.error(err.message)
-          }
+        } catch (err) {
+          console.error(err.message)
         }
-        fetchCart()
-      }, [])
+      }
+      fetchCart()
+    }, [])
 
     const validateAndUpdate = (newQuantity, index) => {
       setCartItems(prevItems => {
@@ -63,13 +63,21 @@ const useCartForm = () => {
     }
 
 
-    const handleDelete = async (prodcuctId) => {
-        const itemToUpdate = [{
-            productId:prodcuctId,
-            quantity: 0,
-        }]
+    const handleDelete = async (productId) => {
+      const itemToUpdate = [{
+          productId: productId,
+          quantity: 0,
+      }]
 
-        updateCart(itemToUpdate)
+      try {
+        await updateCart(itemToUpdate)
+    
+        setCartItems(prevItems =>
+          prevItems.filter(item => item.productId !== productId)
+        )
+        } catch (err) {
+          console.error('Failed to delete cart item:', err)
+        }
     }
 
     const getTotal = () => {

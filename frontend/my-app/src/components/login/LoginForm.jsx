@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {
     containerStyle,
     cardStyle,
     inputStyle,
     errorTextStyle,
     buttonStyle,
-    registerWrapperStyle,
-    registerLinkStyle
 } from './loginStyle';
 import useLoginForm from '../../hooks/useLoginForm';
 import TextInput from '../common/TextInput';
@@ -19,7 +18,6 @@ const LoginForm = () => {
         emailError,
         error,
         isLoginDisabled,
-        handleRegisterClick,
         handleEmailChange,
         handlePasswordChange,
         handleLogin,
@@ -28,11 +26,9 @@ const LoginForm = () => {
     return (
         <div style={containerStyle}>
             <div style={cardStyle}>
-                <div style={registerWrapperStyle}>
-                    <button onClick={handleRegisterClick} style={registerLinkStyle}>
-                        Register
-                    </button>
-                </div>
+                <Link to="/register" style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+                    Register
+                </Link>
                 <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Login</h2>
                 <TextInput
                     type="email"

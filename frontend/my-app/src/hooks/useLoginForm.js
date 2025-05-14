@@ -30,15 +30,11 @@ const useLoginForm = () => {
             const data = await loginUser({ email, password });
             document.cookie = `access_token=${data.access_token}; path=/; max-age=3600;`;
             document.cookie = `user_id=${data.user_id}; path=/; max-age=3600;`;
-            navigate("/search")
+            navigate("/")
         } catch (err) {
             console.error('Login Failed:', err.message);
             setError(err.message);
         }
-    };
-
-    const handleRegisterClick = () => {
-        navigate("/register")
     };
 
     return {
@@ -47,7 +43,6 @@ const useLoginForm = () => {
         emailError,
         error,
         isLoginDisabled: emailError || !email || !password,
-        handleRegisterClick,
         handleEmailChange,
         handlePasswordChange,
         handleLogin,

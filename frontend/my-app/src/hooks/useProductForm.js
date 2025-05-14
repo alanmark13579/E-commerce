@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { productDetail } from '../api/productApi'
 import { addCart } from "../api/cartApi"
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const useProductForm = (productId, remainNumber) => {
   const [thumbnails, setThumbnails] = useState([])
   const [mainImage, setMainImage] = useState(null)
   const [quantity, setQuantity] = useState(1)
   const [error, setError] = useState("")
-
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetch = async () => {
@@ -23,6 +25,13 @@ const useProductForm = (productId, remainNumber) => {
   }, [productId])
 
   const handleAddToCart = (Id) => {
+    const token = Cookies.get('access_token')
+    if (!token) {
+        alert('Please log in to view the shopping cart')
+        navigate('/login')
+        return
+    }
+    
     addCart(Id, quantity)
   }
 

@@ -16,6 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -41,12 +42,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestPath = request.getServletPath();
 
         // Don't validate Public paths
-        List<String> publicPaths = Arrays.asList(
-                "/login",
-                "/register"
+        List<Pattern> publicPatterns = Arrays.asList(
+                Pattern.compile("^/login$"),
+                Pattern.compile("^/register$"),
+                Pattern.compile("^/products.*")
         );
 
-        if (publicPaths.contains(requestPath)) {
+        boolean isPublic = publicPatterns.stream()
+                .anyMatch(p -> p.matcher(requestPath).matches());
+
+        if (isPublic) {
             filterChain.doFilter(request, response);
             return;
         }
