@@ -1,14 +1,15 @@
 package com.sideproject.ecommerce.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
     private Long id;
     private String name;

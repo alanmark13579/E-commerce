@@ -6,7 +6,9 @@ import com.sideproject.ecommerce.mapper.ProductMapper;
 import com.sideproject.ecommerce.model.ProductImage;
 import com.sideproject.ecommerce.repository.ProductImageRepository;
 import com.sideproject.ecommerce.repository.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class ProductService {
     @Autowired
     public void setProductMapper(ProductMapper productMapper) {this.productMapper = productMapper;}
 
+    @Cacheable(value = "productSearch", key = "#query", unless = "#result == null or #result.isEmpty()")
     public List<ProductDto>  getProducts(String query){
         List<Product> products = productRepository.findByNameContaining(query);
 
