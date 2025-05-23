@@ -6,12 +6,14 @@
 
 ## 📐 架構圖（Architecture）& 技術選擇
 <table>
-  <tr>
-    <td style="vertical-align: top; width: 300px">
-      <img src="https://upload.cc/i1/2025/05/16/GA9SMd.png" alt="架構圖" width="100%">
-    </td>
-    <td style="vertical-align: top; padding-left: 20px">
-  
+<tr>
+<td width="360">
+
+<img src="https://upload.cc/i1/2025/05/23/059nPl.jpg" style="max-width: 100%; height: auto;">
+
+</td>
+<td>
+
   | 類別 | 描述 |
   |------|------|
   | AWS Amplify | 前端部署，內建 CDN 與 CI/CD |
@@ -31,14 +33,16 @@
 | 免費流量 | 每月 750 小時 |  每月 750 小時 |
 | AWS Amplify 兼容 | 完美兼容 |  需 API Gateway |
 
-| 方案 |Amazon RDS | Amazon Aurora | Amazon EC2 |
-| -------- | -------- | -------- | -------- | 
-| 特點    | 管理簡單、支援自動備份與更新     | 高效能、可擴展性、低延遲     | 完全控制、彈性高、成本可控 | 
-| 免費層    |  750 小時    |   1 GB 儲存空間和 25 GB 的 I/O 請求     | 750 小時 | 
-| 學習成本   |  低    |  中    | 高 | 
-  
-  </tr>
+| 方案 |Amazon RDS | Amazon Aurora |
+| -------- | -------- | -------- |
+| 特點    | 管理簡單、支援自動備份與更新     | 高效能、可擴展性、低延遲     |
+| 免費層    |  750 小時    |   1 GB 儲存空間和 25 GB 的 I/O 請求    | 
+
+
+</td>
+</tr>
 </table>
+  
 ---
 
 ## 📊 ER 圖（Entity-Relationship Diagram）
