@@ -43,6 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Don't validate Public paths
         List<Pattern> publicPatterns = Arrays.asList(
+                Pattern.compile("^/health$"),
                 Pattern.compile("^/login$"),
                 Pattern.compile("^/register$"),
                 Pattern.compile("^/products.*")
