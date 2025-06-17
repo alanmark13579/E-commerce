@@ -18,6 +18,7 @@ const CartForm = () => {
         handleBlur,
         getTotal,
         handleDelete,
+        formatPrice
     } = useCartForm();
     
     return (
@@ -59,7 +60,7 @@ const CartForm = () => {
                     {item.error && <div style={{ color: 'red', marginTop: '4px', fontSize: '0.9em' }}>{item.error}</div>}
                 </div>
             
-                <div style={columnStyle.total}>${item.price * item.quantity}</div>
+                <div style={columnStyle.total}>${formatPrice(item.price * item.quantity)}</div>
                 
                 </div>
             ))}

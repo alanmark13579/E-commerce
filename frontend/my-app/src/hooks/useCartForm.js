@@ -83,11 +83,19 @@ const useCartForm = () => {
     const getTotal = () => {
       return cartItems.reduce((sum, item) => {
         if (!item.error) {
-          return sum + item.price * item.quantity;
+          const subtotal = Math.round(item.price * item.quantity * 100) / 100
+          return sum + subtotal
         }
-        return sum;
-      }, 0);
-    };
+        return sum
+      }, 0)
+    }
+
+    const formatPrice = (num) => {
+      const rounded = Math.round(num * 100) / 100
+      return rounded % 1 === 0
+        ? `${rounded.toLocaleString()}`
+        : `${rounded.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`
+    }
 
     return {
         cartItems,
@@ -97,6 +105,7 @@ const useCartForm = () => {
         handleBlur,
         getTotal,
         handleDelete,
+        formatPrice
     }
 }
 
